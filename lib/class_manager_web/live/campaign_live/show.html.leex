@@ -1,0 +1,27 @@
+<h1>Show Campaign</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, ClassManagerWeb.CampaignLive.FormComponent,
+    id: @campaign.id,
+    title: @page_title,
+    action: @live_action,
+    campaign: @campaign,
+    return_to: Routes.campaign_show_path(@socket, :show, @campaign) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Subject:</strong>
+    <%= @campaign.subject %>
+  </li>
+
+  <li>
+    <strong>Body:</strong>
+    <%= @campaign.body %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.campaign_show_path(@socket, :edit, @campaign), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.campaign_index_path(@socket, :index) %></span>
